@@ -3,6 +3,7 @@ package com.anjac.sakthi.anjacalumni.libs;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.view.View;
 
 
 public class ConnectionDetector {
@@ -13,9 +14,11 @@ public class ConnectionDetector {
 	{
 		_context=context;
 	}
-	
 
-	public boolean isConnectingToInternet() {
+
+
+
+    public boolean isConnectingToInternet() {
 		ConnectivityManager
 				cm = (ConnectivityManager) _context.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();

@@ -20,6 +20,7 @@ public class UserLogin extends AppCompatActivity implements View.OnClickListener
 
     EditText user,pass;
     Button login;
+    String mail,passs;
     TextView signup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class UserLogin extends AppCompatActivity implements View.OnClickListener
     pass=findViewById(R.id.password);
     login=findViewById(R.id.login);
     signup=findViewById(R.id.signup);
+
 
     signup.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -40,33 +42,60 @@ public class UserLogin extends AppCompatActivity implements View.OnClickListener
     }
     public void loginuser(View view)
     {
-        String ref_url="http://192.168.43.218/Android/login.php";
-        if (new ConnectionDetector(this).isConnectingToInternet()) {
-            try {
-                Log.d(">>>>>>",user.getText().toString());
-                new RRManager(this).setRequestMethod("POST").setLoadingMsg("Please Wait")
-                        .setURL(ref_url).setParams(new JSONObject().put("tag","register").put("pass",pass.getText().toString())
-                        .put("mail",user.getText().toString()).put("phone",user.getText().toString()))
-                        .setResponseListner(new RRManager.ResponseListner() {
-                            @Override
-                            public void onResponse(JSONObject params, String response) throws JSONException {
-                                Log.d(">>>>>>>>>Json", response);
-                                JSONObject object = new JSONObject(response);
-                                if (object.has("error_msg") && object.getInt("error_msg") == 0 && object.getInt("active")==1) {
-                                    Toast.makeText(UserLogin.this, object.getString("msg"), Toast.LENGTH_SHORT).show();
-                                    Intent i=new Intent(UserLogin.this,MainActivity.class);
-                                    startActivity(i);
-                                } else {
-                                    Toast.makeText(UserLogin.this, "Try Again Later", Toast.LENGTH_SHORT).show();
+        mail=user.getText().toString();
+        passs=pass.getText().toString();
+        if(mail.equals("") && passs.equals("")){
+            Toast.makeText(UserLogin.this,"Fill Mail Id and Password",Toast.LENGTH_SHORT).show();
+    }
+    if(mail!=null && passs==null)
+        {
+            pass.setError("Fill Password");
+        }
+     if(passs!=null && mail==null)
+        {
+            user.setError("Fill Mail id");
+        }
+
+            String ref_url = "http://192.168.43.193/Android/login.php";
+            if (new ConnectionDetector(this).isConnectingToInternet()) {
+                try {
+                    Log.d(">>>>>>", user.getText().toString());
+                    new RRManager(this).setRequestMethod("POST").setLoadingMsg("Please Wait")
+                            .setURL(ref_url).setParams(new JSONObject().put("tag", "register").put("pass", passs)
+                            .put("mail",mail))
+                            .setResponseListner(new RRManager.ResponseListner() {
+                                @Override
+                                public void onResponse(JSONObject params, String response) throws JSONException {
+                                    Log.d(">>>>>>>>>Json", response);
+                                    JSONObject object = new JSONObject(response);
+                                    if (object.has("con") && object.getInt("con") != 1) {
+                                        if (object.has("error_msg") && object.getInt("error_msg") == 0 && object.getInt("active") == 1) {
+                                            Toast.makeText(UserLogin.this, object.getString("msg"), Toast.LENGTH_SHORT).show();
+                                            Intent i = new Intent(UserLogin.this, MainActivity.class);
+                                            startActivity(i);
+                                        }
+                                        if (object.has("error_msg") && object.getInt("error_msg") == 11 && object.getInt("active") == 0) {
+                                            Toast.makeText(UserLogin.this, "Activate Your Account", Toast.LENGTH_SHORT).show();
+                                        }
+                                        if (object.has("error_msg") && object.getInt("error_msg") == 11 && object.getInt("active") == 1) {
+                                            Toast.makeText(UserLogin.this, "Check Mail id and Password", Toast.LENGTH_SHORT).show();
+                                        }
+                                    } else {
+                                        Toast.makeText(UserLogin.this, "Try Again Later Server Busy", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        }).execute();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+                            }).execute();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
         }
     }
 
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+    }
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {

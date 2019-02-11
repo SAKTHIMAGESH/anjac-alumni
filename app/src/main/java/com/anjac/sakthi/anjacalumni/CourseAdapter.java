@@ -35,7 +35,7 @@ public class CourseAdapter extends ArrayAdapter<CourseItem> {
         {
             convertView= LayoutInflater.from(getContext()).inflate(R.layout.course_spinner_row,parent,false);
             }
-        TextView course=convertView.findViewById(R.id.course_name);
+            TextView course=convertView.findViewById(R.id.course_name);
         CourseItem courseItem=getItem(position);
         if(courseItem!=null) {
             course.setText(courseItem.getCoursename());

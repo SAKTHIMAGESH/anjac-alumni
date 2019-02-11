@@ -17,8 +17,6 @@ public class SplashScreen extends AppCompatActivity {
         RelativeLayout relativeLayout=(RelativeLayout)findViewById(R.id.rel);
         Animation animation= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
         relativeLayout.startAnimation(animation);
-        Animation animationq= AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_out);
-        relativeLayout.startAnimation(animationq);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -27,5 +25,10 @@ public class SplashScreen extends AppCompatActivity {
                 startActivity(i);
             }
         },3000);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }
