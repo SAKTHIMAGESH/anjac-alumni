@@ -98,6 +98,12 @@
                     android:layout_marginRight="32dp"
                     android:paddingLeft="10dp"
                     />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@id/activate"
+                    android:text="@string/activate"
+                    android:onClick="active"/>
 
             </LinearLayout>
         </RelativeLayout>

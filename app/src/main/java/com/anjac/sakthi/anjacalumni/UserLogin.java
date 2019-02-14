@@ -68,20 +68,17 @@ public class UserLogin extends AppCompatActivity implements View.OnClickListener
                                 public void onResponse(JSONObject params, String response) throws JSONException {
                                     Log.d(">>>>>>>>>Json", response);
                                     JSONObject object = new JSONObject(response);
-                                    if (object.has("con") && object.getInt("con") != 1) {
-                                        if (object.has("error_msg") && object.getInt("error_msg") == 0 && object.getInt("active") == 1) {
-                                            Toast.makeText(UserLogin.this, object.getString("msg"), Toast.LENGTH_SHORT).show();
-                                            Intent i = new Intent(UserLogin.this, MainActivity.class);
-                                            startActivity(i);
-                                        }
-                                        if (object.has("error_msg") && object.getInt("error_msg") == 11 && object.getInt("active") == 0) {
-                                            Toast.makeText(UserLogin.this, "Activate Your Account", Toast.LENGTH_SHORT).show();
-                                        }
-                                        if (object.has("error_msg") && object.getInt("error_msg") == 11 && object.getInt("active") == 1) {
-                                            Toast.makeText(UserLogin.this, "Check Mail id and Password", Toast.LENGTH_SHORT).show();
-                                        }
-                                    } else {
-                                        Toast.makeText(UserLogin.this, "Try Again Later Server Busy", Toast.LENGTH_SHORT).show();
+
+                                    if (object.has("error_msg") && object.getInt("error_msg") == 0 && object.getInt("active") == 1) {
+                                        Toast.makeText(UserLogin.this, object.getString("msg"), Toast.LENGTH_SHORT).show();
+                                        Intent i = new Intent(UserLogin.this, MainActivity.class);
+                                        startActivity(i);
+                                    }
+                                    if (object.has("error_msg") && object.getInt("error_msg") == 11 && object.getInt("active") == 0) {
+                                        Toast.makeText(UserLogin.this, "Activate Your Account", Toast.LENGTH_SHORT).show();
+                                    }
+                                    if (object.has("error_msg") && object.getInt("error_msg") == 11 && object.getInt("active") == 1) {
+                                        Toast.makeText(UserLogin.this, "Check Mail id and Password", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }).execute();
@@ -106,4 +103,11 @@ public class UserLogin extends AppCompatActivity implements View.OnClickListener
     public void onClick(View view) {
 
     }
+
+    public void active(View view) {
+    Intent i=new Intent(UserLogin.this,Activation.class);
+    startActivity(i);
+
+    }
+
 }

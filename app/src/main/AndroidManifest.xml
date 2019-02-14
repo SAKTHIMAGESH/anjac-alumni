@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.anjac.sakthi.anjacalumni">
-<uses-permission android:name="android.permission.READ_SMS"/>
+
+    <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -32,7 +33,8 @@
         </activity>
         <activity android:name=".UserLogin" />
         <activity android:name=".Register" />
-        <activity android:name=".Register2"></activity>
+        <activity android:name=".Register2" />
+        <activity android:name=".Activation"></activity>
     </application>
 
 </manifest>

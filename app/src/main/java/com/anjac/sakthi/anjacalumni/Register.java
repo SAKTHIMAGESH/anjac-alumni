@@ -132,8 +132,5 @@ Log.d(">>>>>>>>>>>>>>>",String.valueOf(dum));
 
     }
 
-    @Override
-    public void onBackPressed() {
-//        super.onBackPressed();
-    }
+
 }

@@ -25,4 +25,7 @@
     <string name="roll_no">Roll No</string>
     <string name="enter_your_place">Enter your Place</string>
     <string name="logout">LogOut</string>
+    <string name="otp">Enter Your OTP</string>
+    <string name="acitvate">Acitvate</string>
+    <string name="activate">activate</string>
 </resources>

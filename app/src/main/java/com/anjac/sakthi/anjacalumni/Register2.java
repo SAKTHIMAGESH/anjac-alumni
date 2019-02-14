@@ -250,12 +250,10 @@ courses="PHS";
                 new RRManager(this).setRequestMethod("POST").setLoadingMsg("Please Wait")
                         .setURL(ref_url).setParams(new JSONObject().put("tag","register").put("fname",fname)
                         .put("lname",lname).put("mail",mail).put("pno",pno).put("pass",pass).put("course",courses).put("branch",dep).
-                        put("year",yearss).put("dob",dobs).put("rollno",rollnos).put("place",places))
+                        put("year",yearss).put("dob",dobs).put("rollno",rollnos).put("place",places).put("active","0"))
                         .setResponseListner(new RRManager.ResponseListner() {
                             @Override
                             public void onResponse(JSONObject params, String response) throws JSONException {
-                                Log.d(">>>>>>>>>Json", response);
-
                                 Log.d(">>>>>>>",fname);
                                 Log.d(">>>>>>>",lname);
                                 Log.d(">>>>>>>",mail);
@@ -265,9 +263,11 @@ courses="PHS";
                                 Log.d(">>>>>",yearss);
                                 Log.d(">>>>>>",rollnos);
                                 JSONObject object = new JSONObject(response);
+                                Log.d(">>>>>>",response);
+                                Log.d(">>>>>>>>>>>>>",object.getString("msg"));
                                 if (object.has("error_msg") && object.getInt("error_msg") == 0 ) {
                                     Toast.makeText(Register2.this, object.getString("msg"), Toast.LENGTH_SHORT).show();
-                                    Intent i=new Intent(Register2.this,UserLogin.class);
+                                    Intent i=new Intent(Register2.this,Activation.class);
                                     startActivity(i);
                                 } else {
                                     Toast.makeText(Register2.this, "Try Again Later", Toast.LENGTH_SHORT).show();
@@ -280,9 +280,6 @@ courses="PHS";
         }
     }
 
-    @Override
-    public void onBackPressed() {
-//        super.onBackPressed();
-    }
+
 }
 
